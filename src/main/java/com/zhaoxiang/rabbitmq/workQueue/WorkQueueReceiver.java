@@ -11,7 +11,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class WorkQueueReceiver {
 
-    private static final String QUEUE_NAME = "hello";
+    private static final String QUEUE_NAME = "rivers_queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
 

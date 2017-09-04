@@ -23,8 +23,10 @@ public class RoutingReceiverLogs {
         channel.exchangeDeclare(EXCHANGE_NAME, "direct");
         String queueName = channel.queueDeclare().getQueue();
 
-        String severity = "error";
-        channel.queueBind(queueName, EXCHANGE_NAME, severity);
+        String[] severities = new String[]{"error", "fatal"};
+        for (String severity : severities) {
+            channel.queueBind(queueName, EXCHANGE_NAME, severity);
+        }
         System.out.println("[x] Waiting messages. ");
 
         Consumer consumer = new DefaultConsumer(channel) {

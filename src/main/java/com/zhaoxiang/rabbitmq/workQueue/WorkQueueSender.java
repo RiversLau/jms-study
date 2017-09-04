@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class WorkQueueSender {
 
-    private static final String QUEUE_NAME = "hello";
+    private static final String QUEUE_NAME = "rivers_queue";
 
     public static void main(String[] args) throws IOException, TimeoutException {
 
@@ -26,7 +26,9 @@ public class WorkQueueSender {
         connectionFactory.setHost("localhost");
         Connection connection = connectionFactory.newConnection();
         Channel channel = connection.createChannel();
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+
+        boolean durable = true;
+        channel.queueDeclare(QUEUE_NAME, durable, false, false, null);
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while(true) {
@@ -40,6 +42,5 @@ public class WorkQueueSender {
         }
         channel.close();
         connection.close();
-        System.exit(0);
     }
 }
