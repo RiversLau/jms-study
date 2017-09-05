@@ -6,5 +6,6 @@ package com.zhaoxiang.rocketmq;
  */
 public interface RocketMQConstants {
 
-    String NAMESRVADDR = "xx.xxx.xxx.xxx:9876";
+//    String NAMESRVADDR = "xx.xxx.xxx.xxx:9876";
+    String NAMESRVADDR = "39.108.141.144:9876";
 }
