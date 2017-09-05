@@ -23,7 +23,7 @@ public class SyncProducer {
         producer.setNamesrvAddr(RocketMQConstants.NAMESRVADDR);
         producer.start();
 
-        Message msg = new Message("SyncTopic", "TagA || TagB", "Hello RocketMQ sync message".getBytes(RemotingHelper.DEFAULT_CHARSET));
+        Message msg = new Message("SyncTopic", "TagA", "Hello RocketMQ sync message".getBytes(RemotingHelper.DEFAULT_CHARSET));
         SendResult result = producer.send(msg);
         System.out.println(result);
 

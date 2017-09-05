@@ -25,7 +25,6 @@ public class SyncConsumer {
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
 
-                System.out.println(list.size());
                 for (MessageExt messageExt : list) {
                     System.out.println(messageExt.getTopic() + ":" + messageExt.getTags() + ":" + new String(messageExt.getBody()));
                 }

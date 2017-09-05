@@ -24,7 +24,7 @@ public class AsyncProducer {
         producer.setInstanceName("AsyncProducer");
         producer.start();
 
-        Message msg = new Message("async_topic", "TagA||TagB", "Hello RocketMQ async message".getBytes(RemotingHelper.DEFAULT_CHARSET));
+        Message msg = new Message("async_topic", "TagA", "Hello RocketMQ async message".getBytes(RemotingHelper.DEFAULT_CHARSET));
         producer.send(msg, new SendCallback() {
             public void onSuccess(SendResult sendResult) {
                 System.out.println("Send async msg success!");

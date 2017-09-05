@@ -22,7 +22,7 @@ public class OnewayProducer {
         producer.setNamesrvAddr(RocketMQConstants.NAMESRVADDR);
         producer.start();
 
-        Message msg = new Message("oneway_topic", "TagA||TagB", "Hello RocketMQ sync message".getBytes(RemotingHelper.DEFAULT_CHARSET));
+        Message msg = new Message("oneway_topic", "TagA", "Hello RocketMQ sync message".getBytes(RemotingHelper.DEFAULT_CHARSET));
         producer.sendOneway(msg);
 
         producer.shutdown();
