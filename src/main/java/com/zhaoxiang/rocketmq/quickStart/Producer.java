@@ -1,5 +1,6 @@
 package com.zhaoxiang.rocketmq.quickStart;
 
+import com.zhaoxiang.rocketmq.RocketMQConstants;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -16,8 +17,9 @@ public class Producer {
     public static void main(String[] args) throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
 
         DefaultMQProducer producer = new DefaultMQProducer("testGroupName");
-        producer.setNamesrvAddr("39.108.141.144:9876");
+        producer.setNamesrvAddr(RocketMQConstants.NAMESRVADDR);
         producer.setInstanceName("Producer");
+//        producer.setVipChannelEnabled(false);
 
         producer.start();
 
