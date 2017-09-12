@@ -8,6 +8,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
@@ -21,15 +22,26 @@ public class Consumer {
 
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("testGroupName");
         consumer.setNamesrvAddr(RocketMQConstants.NAMESRVADDR);
+        consumer.setMessageModel(MessageModel.CLUSTERING);
         consumer.setInstanceName("Producer");
         consumer.subscribe("testTopic", "TagA||TagB");
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
+
+            int brokerA = 0, brokerB;
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
 
-                for (MessageExt messageExt : list) {
-                    System.out.println(messageExt.getTopic() + ":" + messageExt.getTags() + ":" + new String(messageExt.getBody()));
+                String brokerName = consumeConcurrentlyContext.getMessageQueue().getBrokerName();
+                if ("broker-a".equals(brokerName)) {
+                    brokerA++;
                 }
+                if ("broker-b".equals(brokerName)) {
+                    brokerB++;
+                }
+                for (MessageExt messageExt : list) {
+                    System.out.println(messageExt.getStoreHost().toString() + messageExt.getTopic() + ":" + messageExt.getTags() + ":" + new String(messageExt.getBody()));
+                }
+                System.out.println("broker-a ==" + brokerA + ";broker-b ==" + brokerB);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
