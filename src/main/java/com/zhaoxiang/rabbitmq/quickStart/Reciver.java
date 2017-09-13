@@ -16,7 +16,10 @@ public class Reciver {
     public static void main(String[] args) throws IOException, TimeoutException {
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
-        connectionFactory.setHost("localhost");
+        connectionFactory.setHost("119.23.26.77");
+        connectionFactory.setPort(5672);
+        connectionFactory.setUsername("zhaoxiang");
+        connectionFactory.setPassword("zhaoxiang@35");
         Connection connection = connectionFactory.newConnection();
         Channel channel = connection.createChannel();
 

@@ -20,15 +20,15 @@ public class Producer {
 
     public static void main(String[] args) throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
 
-        DefaultMQProducer producer = new DefaultMQProducer("testGroupName");
+        DefaultMQProducer producer = new DefaultMQProducer("master-slave");
         producer.setNamesrvAddr(RocketMQConstants.NAMESRVADDR);
         producer.setInstanceName("Producer");
 //        producer.setVipChannelEnabled(false);
 
         producer.start();
 
-        for (int i = 0; i < 20; i++) {
-            Message msg = new Message("testTopic", "TagA", "test-0001", ("Hello RocketMQ" + i).getBytes());
+        for (int i = 0; i < 10; i++) {
+            Message msg = new Message("msTopic", "TagA", "test-0001", ("Hello RocketMQ" + i).getBytes());
             SendResult result = producer.send(msg);
             System.out.println(result.getSendStatus().toString());
         }
