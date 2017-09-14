@@ -19,7 +19,7 @@ public class Sender {
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("119.23.26.77");
-        connectionFactory.setPort(5672);
+        connectionFactory.setPort(5673);
         connectionFactory.setUsername("zhaoxiang");
         connectionFactory.setPassword("zhaoxiang@35");
         Connection connection = connectionFactory.newConnection();
